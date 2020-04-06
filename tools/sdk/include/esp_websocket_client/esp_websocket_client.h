@@ -85,7 +85,6 @@ typedef struct {
     char                        *subprotocol;               /*!< Websocket subprotocol */
     char                        *user_agent;                /*!< Websocket user-agent */
     char                        *headers;                   /*!< Websocket additional headers */
-    int                         pingpong_timeout_sec;       /*!< Period before connection is aborted due to no PONGs received, disabled if value is 0 */
 } esp_websocket_client_config_t;
 
 /**
@@ -125,9 +124,6 @@ esp_err_t esp_websocket_client_start(esp_websocket_client_handle_t client);
 /**
  * @brief      Close the WebSocket connection
  *
- *  Notes:
- *  - Cannot be called from the websocket event handler 
- *
  * @param[in]  client  The client
  *
  * @return     esp_err_t
@@ -139,10 +135,7 @@ esp_err_t esp_websocket_client_stop(esp_websocket_client_handle_t client);
  *             This function must be the last function to call for an session.
  *             It is the opposite of the esp_websocket_client_init function and must be called with the same handle as input that a esp_websocket_client_init call returned.
  *             This might close all connections this handle has used.
- * 
- *  Notes:
- *  - Cannot be called from the websocket event handler
- * 
+ *
  * @param[in]  client  The client
  *
  * @return     esp_err_t
@@ -192,7 +185,7 @@ int esp_websocket_client_send_bin(esp_websocket_client_handle_t client, const ch
 int esp_websocket_client_send_text(esp_websocket_client_handle_t client, const char *data, int len, TickType_t timeout);
 
 /**
- * @brief      Check the WebSocket client connection state
+ * @brief      Check the WebSocket connection status
  *
  * @param[in]  client  The client handle
  *

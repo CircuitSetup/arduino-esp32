@@ -84,6 +84,7 @@ esp_err_t esp_coex_status_bit_set(esp_coex_status_type_t type, uint32_t status);
  */
 esp_err_t esp_coex_status_bit_clear(esp_coex_status_type_t type, uint32_t status);
 
+
 #ifdef __cplusplus
 }
 #endif
